@@ -1,18 +1,26 @@
 <?php
+  session_start();
+
+  if ( !array_key_exists( 'loggedIn', $_SESSION ) ) {
+    $_SESSION['loggedIn'] = "";
+  }
+
+  $loggedIn = false;
 
   $KNOWN_EMAIL = "root@root.com";
   $KNOWN_PW = "root";
-  $loggedIn = false;
 
-  // echo "<pre>";
-  // var_dump( $_POST );
-  // echo "</pre>";
+  if ( isset($_POST['logOut'] ) ) {
+    $_SESSION['loggedIn'] = false;
+    $loggedIn = false;
+  }
 
-  if ( $_POST ) {
+  if ( isset( $_POST['email'] ) && isset ($_POST['password']) ) {
     $email = $_POST['email'];
     $pw = $_POST['password'];
     if ( $email === $KNOWN_EMAIL && $pw === $KNOWN_PW ) {
       $loggedIn = true;
+      $_SESSION['loggedIn'] = true;
     }
   }
 
@@ -35,6 +43,10 @@
   if ( $loggedIn ) {
     ?>
     <h1>Thanks for popping by!</h1>
+
+    <form action="index.php" method="post">
+      <button name="logOut" type="submit" class="btn btn-primary" formmethod="post">Logout</button>
+    </form>
     <?php
   }
   else {

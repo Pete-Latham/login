@@ -1,3 +1,24 @@
+<?php
+
+  $KNOWN_EMAIL = "root@root.com";
+  $KNOWN_PW = "root";
+  $loggedIn = false;
+
+  // echo "<pre>";
+  // var_dump( $_POST );
+  // echo "</pre>";
+
+  if ( $_POST ) {
+    $email = $_POST['email'];
+    $pw = $_POST['password'];
+    if ( $email === $KNOWN_EMAIL && $pw === $KNOWN_PW ) {
+      $loggedIn = true;
+    }
+  }
+
+?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -10,20 +31,31 @@
   <title>Login</title>
 </head>
 <body class="container">
-  <h1>Please feel free to log in ...</h1>
+<?php
+  if ( $loggedIn ) {
+    ?>
+    <h1>Thanks for popping by!</h1>
+    <?php
+  }
+  else {
+    ?>
+    <h1>Please feel free to log in ...</h1>
 
-  <form method = "post">
-    <div class="form-group">
-      <label for="exampleInputEmail1">Email address</label>
-      <input type="email" class="form-control" id="inputEmail" placeholder="Enter email">
-      <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else (if you're lucky).</small>
-    </div>
-    <div class="form-group">
-      <label for="exampleInputPassword1">Password</label>
-      <input type="password" class="form-control" id="inputPassword">
-    </div>
-    <button type="submit" class="btn btn-primary">Submit</button>
-  </form>
+    <form action="index.php" method="post">
+      <div class="form-group">
+        <label for="exampleInputEmail1">Email address</label>
+        <input name="email" type="email" class="form-control" id="inputEmail" placeholder="Enter email">
+        <small id="emailHelp" class="form-text text-muted">We'll never share your email with anyone else (if you're lucky).</small>
+      </div>
+      <div class="form-group">
+        <label for="exampleInputPassword1">Password</label>
+        <input name="password" type="password" class="form-control" id="inputPassword">
+      </div>
+      <button type="submit" class="btn btn-primary" formmethod="post">Submit</button>
+    </form>
+    <?php
+  }
+  ?>
 
   <script src="node_modules/jquery/dist/jquery.min.js"></script>
   <script src="node_modules/popper.js/dist/umd/popper.min.js"></script>

@@ -1,7 +1,6 @@
 <?php
 
 include( 'db_connect.php' );
-// var_dump($db_connection);
 
 include( 'snippets/signup_header.php' );
 
@@ -29,7 +28,7 @@ if ( $_POST ) {
 
     include( 'snippets/thankyou_prevalidate.php' );
 
-    $buildURL = "http://scotchbox/login_page/validate.php?user=$userCreated&code=$token";
+    $buildURL = "http://192.168.33.10/login_form/validate.php?user=$userCreated&code=$token";
 
     mail( $clean_email, "Please validate", "Thanks for signing up with us. Please visit $buildURL to complete the validation process. Ta.");
   }

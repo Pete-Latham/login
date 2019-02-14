@@ -19,7 +19,7 @@
     $suppliedEmail = mysqli_real_escape_string($db_connection, $suppliedEmail);
     $suppliedPw = $_POST['password'];
 
-    $query = "SELECT `password` FROM `users` where `username` = '$suppliedEmail';";
+    $query = "SELECT `password`, `validationCode` FROM `users` where `username` = '$suppliedEmail';";
 
     $result = mysqli_query( $db_connection, $query );
 
@@ -28,20 +28,20 @@
       if ( $rows === 1 ) {
         $row = mysqli_fetch_row( $result );
         $knownPW = $row[0];
-        if ( password_verify( $suppliedPw, $knownPW ) ) {
+        $valCode = $row[1];
+        if ( password_verify( $suppliedPw, $knownPW ) && !$valCode ) {
           $loggedIn = true;
           $_SESSION['loggedIn'] = true;
+        }
+        else if ( $valCode ) {
+          include( 'snippets/notVal.php' );
         }
       }
       else {
         echo "<p>Sorry, some details don't match</p>";
       }
     }
-    else {
-      // Uh oh, query didn't run! A problem with the query
-    }
   }
-
 ?>
 
 
@@ -82,6 +82,7 @@
         <input name="password" type="password" class="form-control" id="inputPassword">
       </div>
       <button type="submit" class="btn btn-primary" formmethod="post">Submit</button>
+      <a href="sign_up.php" class="btn btn-dark">Sign Up</a>
     </form>
     <?php
   }

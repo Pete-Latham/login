@@ -16,6 +16,7 @@
 
   if ( isset( $_POST['email'] ) && isset ($_POST['password']) ) {
     $suppliedEmail = $_POST['email'];
+    $suppliedEmail = mysqli_real_escape_string($db_connection, $suppliedEmail);
     $suppliedPw = $_POST['password'];
 
     $query = "SELECT `password` FROM `users` where `username` = '$suppliedEmail';";

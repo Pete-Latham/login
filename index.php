@@ -19,7 +19,6 @@
     $suppliedPw = $_POST['password'];
 
     $query = "SELECT `password` FROM `users` where `username` = '$suppliedEmail';";
-    // echo( $query );
 
     $result = mysqli_query( $db_connection, $query );
 
@@ -27,7 +26,6 @@
       $rows = mysqli_num_rows( $result );
       if ( $rows === 1 ) {
         $row = mysqli_fetch_row( $result );
-        var_dump( $row );
         $knownPW = $row[0];
         if ( password_verify( $suppliedPw, $knownPW ) ) {
           $loggedIn = true;

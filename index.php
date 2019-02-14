@@ -5,10 +5,9 @@
     $_SESSION['loggedIn'] = "";
   }
 
-  $loggedIn = false;
+  include 'db_connect.php';
 
-  $KNOWN_EMAIL = "root@root.com";
-  $KNOWN_PW = "root";
+  $loggedIn = false;
 
   if ( isset($_POST['logOut'] ) ) {
     $_SESSION['loggedIn'] = false;
@@ -16,11 +15,31 @@
   }
 
   if ( isset( $_POST['email'] ) && isset ($_POST['password']) ) {
-    $email = $_POST['email'];
-    $pw = $_POST['password'];
-    if ( $email === $KNOWN_EMAIL && $pw === $KNOWN_PW ) {
-      $loggedIn = true;
-      $_SESSION['loggedIn'] = true;
+    $suppliedEmail = $_POST['email'];
+    $suppliedPw = $_POST['password'];
+
+    $query = "SELECT `password` FROM `users` where `username` = '$suppliedEmail';";
+    // echo( $query );
+
+    $result = mysqli_query( $db_connection, $query );
+
+    if ($result) {
+      $rows = mysqli_num_rows( $result );
+      if ( $rows === 1 ) {
+        $row = mysqli_fetch_row( $result );
+        var_dump( $row );
+        $knownPW = $row[0];
+        if ( password_verify( $suppliedPw, $knownPW ) ) {
+          $loggedIn = true;
+          $_SESSION['loggedIn'] = true;
+        }
+      }
+      else {
+        echo "<p>Sorry, some details don't match</p>";
+      }
+    }
+    else {
+      // Uh oh, query didn't run! A problem with the query
     }
   }
 

@@ -5,6 +5,10 @@
     $_SESSION['loggedIn'] = "";
   }
 
+  if ( !array_key_exists( 'rememberedUser', $_SESSION ) ) {
+    $_SESSION['rememberedUser'] = "";
+  }
+
   $rememberedUser=$_SESSION['rememberedUser'];
 
   include 'db_connect.php';

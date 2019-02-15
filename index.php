@@ -97,6 +97,7 @@
       </div>
       <button type="submit" class="btn btn-primary" formmethod="post">Submit</button>
       <a href="sign_up.php" class="btn btn-dark">Sign Up</a>
+      <a href="forgot.php" class="font-weight-light forgot">I've forgotten my password</a>
     </form>
     <?php
   }

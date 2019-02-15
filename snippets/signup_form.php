@@ -29,4 +29,5 @@
       </div>
 
       <button type="submit" class="btn btn-primary" formmethod="post">Submit</button>
+      <a href="index.php" class="btn btn-dark">Cancel</a>
     </form>

@@ -31,7 +31,7 @@ if ( $_POST ) {
     $id = $_SESSION['resetUser'];
     $hashed_password = password_hash( $_POST['password1'], PASSWORD_DEFAULT );
 
-    $query = "UPDATE `users` SET `password` = '$hashed_password', `resetCode` = NULL WHERE `id` = $id;";
+    $query = "UPDATE `users` SET `password` = '$hashed_password', `resetCode` = NULL WHERE `id` = '$id';";
     $result = mysqli_query($db_connection, $query);
     if ( mysqli_affected_rows( $result) == 1 ) {
       include( 'snippets/reset_good.php' );

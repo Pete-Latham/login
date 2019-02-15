@@ -6,3 +6,8 @@ form {
   margin-left: 3em;
   display: inline-block;
 }
+
+.image {
+  width: 800px;
+  display: block;
+}

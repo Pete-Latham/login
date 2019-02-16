@@ -13,11 +13,13 @@
 
   $rememberedUser=$_SESSION['rememberedUser'];
 
-  include_once 'helpers/db_connect.php';
+  include_once( 'helpers/db_connect.php' );
+  include_once( 'helpers/messages.php' );
 
   $loggedIn = false;
 
   if ( isset($_POST['logOut'] ) ) {
+    addMessage( "Sorry to see you go", "info" );
     $_SESSION['loggedIn'] = false;
     $loggedIn = false;
   }
@@ -28,9 +30,7 @@
     $suppliedPw = $_POST['password'];
 
     $query = "SELECT `password`, `validationCode` FROM `users` where `username` = '$suppliedEmail';";
-
     $result = mysqli_query( $db_connection, $query );
-
     if ($result) {
       $rows = mysqli_num_rows( $result );
       if ( $rows === 1 ) {
@@ -40,6 +40,7 @@
         if ( password_verify( $suppliedPw, $knownPW ) && !$valCode ) {
           $loggedIn = true;
           $_SESSION['loggedIn'] = true;
+          addMessage( "Welcome to the site" );
           if ( isset( $_POST['remember'] ) ) {
             $_SESSION['rememberedUser'] = $suppliedEmail;
             $rememberedUser = $suppliedEmail;
@@ -51,7 +52,14 @@
         }
         else if ( $valCode ) {
           include( 'snippets/notVal.php' );
+          addMessage( "Sorry, we weren't able to log you in", "danger" );
         }
+        else {
+          addMessage( "Sorry, we weren't able to log you in", "danger" );
+        }
+      }
+      else {
+        addMessage( "Sorry, we weren't able to log you in", "danger" );
       }
     }
   }

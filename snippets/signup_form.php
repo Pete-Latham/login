@@ -1,5 +1,5 @@
 <h1>So, you want to sign up, eh?</h1>
-    <h3>Please complete the information below ...</h3>
+    <p>Please complete the information below ...</p>
 
     <form action="sign_up.php" method="post" class="needs-validation" novalidate>
       <div class="form-group">

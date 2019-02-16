@@ -1,9 +1,10 @@
 <?php
+session_start();
 
 $title = "Did you forget something?";
 
 if ( $_POST ) {
-  include 'db_connect.php';
+  include 'helpers/db_connect.php';
   $email = mysqli_real_escape_string($db_connection, $_POST['email']);
 
   $query = "SELECT `id` from `users` WHERE `username` = '$email';";

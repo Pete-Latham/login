@@ -1,7 +1,9 @@
 <?php
+session_start();
 
-include( 'db_connect.php' );
-include( 'snippets/validate_header.php');
+include( 'helpers/db_connect.php' );
+$title = "Validate your account";
+include( 'snippets/generic_header.php');
 
 if ( $_GET ) {
 

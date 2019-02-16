@@ -7,6 +7,26 @@
   <link rel="stylesheet" href="node_modules/normalize.css/normalize.css">
   <link rel="stylesheet" href="node_modules/bootstrap/dist/css/bootstrap.min.css">
   <link rel="stylesheet" href="css/styles.css">
-  <title><? echo $title ?></title>
+  <title><?php echo $title ?></title>
 </head>
 <body class="container">
+
+<?php
+  $messageList = getMessages();
+  if ( !empty( $messageList ) ) {
+?>
+<section class="messageList">
+    <ul class="list-unstyled">
+<?php
+    foreach( $messageList as $message ) {
+?>
+      <li class="alert alert-<?php echo $message['severity']?>"><?php echo $message['text']?></li>
+<?php
+    }
+?>
+    </ul>
+  </section>
+
+<?php
+}
+?>

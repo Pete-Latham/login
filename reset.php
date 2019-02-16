@@ -1,9 +1,8 @@
 <?php
-
 session_start();
 
 $title = "Password reset";
-include( 'db_connect.php' );
+include( 'helpers/db_connect.php' );
 include( 'snippets/generic_header.php' );
 
 if ( $_GET ) {

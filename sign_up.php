@@ -1,8 +1,9 @@
 <?php
+session_start();
 
-include( 'db_connect.php' );
-
-include( 'snippets/signup_header.php' );
+include_once( 'helpers/db_connect.php' );
+$title="Sign up2";
+include( 'snippets/generic_header.php' );
 
 if ( $_POST ) {
 
